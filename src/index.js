@@ -3,20 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import firebase from 'firebase';
+import { createStore, applyMiddleware, compose } from 'redux';
+import rootReducer from './store/reducers/rootReducer';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { reduxFirestore, getFirestore } from 'redux-firestore';
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
+import cfgFirebase from './config/firebase';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = createStore(rootReducer, 
+    compose(
+        applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+        reduxFirestore(cfgFirebase),
+        reactReduxFirebase(cfgFirebase)
+    )
+);
 
-let config = {
-    apiKey: "AIzaSyBydd68ex9-vN-aRT9IM4huWE_wDuWn28o",
-    authDomain: "event-webapp-bc94d.firebaseapp.com",
-    databaseURL: "https://event-webapp-bc94d.firebaseio.com",
-    storageBucket: "event-webapp-bc94d.appspot.com",
-};
-
-firebase.initializeApp(config);
-
-window.firebase = firebase;
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
