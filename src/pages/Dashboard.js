@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createEvent } from '../store/actions/eventActions';
+import { signOut } from '../store/actions/authActions';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 class Dashboard extends Component {
     state = {
-        eventTitle: '',
-        eventDescription: '',
-        date: '',
-        place: '',
+        title: '',
+        content: '',
     }
 
     handleChange = (e) => {
@@ -23,28 +25,32 @@ class Dashboard extends Component {
     }
 
     render() {
+        if (!this.props.auth.uid) {
+            return <Redirect to="/login" />
+        }
         return (
             <div>
                 This is the dashboard
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" id="eventTitle" onChange={this.handleChange} />
-                    <input type="text" id="eventDescription" onChange={this.handleChange} />
-                    <input type="text" id="date" onChange={this.handleChange} />
-                    <input type="text" id="place" onChange={this.handleChange} />
+                    <input type="text" id="title" onChange={this.handleChange} />
+                    <input type="text" id="content" onChange={this.handleChange} />
                     <button>create event</button>
                 </form>
                 <div>
                     {
-                        this.props.projects.map(project => {
+                        this.props.projects && this.props.projects.map(project => {
                             return( 
                                 <div key={project.id}>
-                                    <p>{project.title}</p>
+                                    <p><b>{project.title}</b></p>
                                     <p>{project.content}</p>
                                 </div>
                             )
                         })
                     }
                 </div>
+                <Link to="/login">
+                    <div onClick={this.props.signOut}>Sign Out</div>
+                </Link>
             </div>
         )
     }
@@ -52,14 +58,21 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        projects: state.event.projects
+        projects: state.firestore.ordered.events,
+        auth: state.firebase.auth
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createEvent: (event) => dispatch(createEvent(event))
+        createEvent: (event) => dispatch(createEvent(event)),
+        signOut: () => dispatch(signOut())
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect([
+        { collection: 'events' }
+    ])
+)(Dashboard);
