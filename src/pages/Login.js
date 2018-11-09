@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { signIn } from '../store/actions/authActions';
+import { withRouter, Redirect } from 'react-router-dom';
 
 class Login extends Component {
     state = {
@@ -18,10 +19,15 @@ class Login extends Component {
         event.preventDefault();
         
         this.props.signIn(this.state)
+        this.props.history.push('/')
     }
 
     render() {
-        const { authError } = this.props
+        const { authError, auth } = this.props
+
+        if(auth.uid) {
+            return <Redirect to="/" />
+        }
 
         return (
         <div>
@@ -42,7 +48,8 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        authError: state.auth.authError
+        authError: state.auth.authError,
+        auth: state.firebase.auth
     }
 }
  
@@ -52,4 +59,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))

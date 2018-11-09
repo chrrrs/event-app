@@ -25,7 +25,9 @@ class Dashboard extends Component {
     }
 
     render() {
-        if (!this.props.auth.uid) {
+        const { auth, profile } = this.props;
+
+        if (!auth.uid) {
             return <Redirect to="/login" />
         }
         return (
@@ -51,15 +53,28 @@ class Dashboard extends Component {
                 <Link to="/login">
                     <div onClick={this.props.signOut}>Sign Out</div>
                 </Link>
+                <div style={{ display: 'flex', justifyContent: 'space-between', width: '20%', alignItems: 'center', margin: '0 auto'}}>
+                    <div>
+                        <div style={{ borderRadius: '100px', backgroundColor: 'grey', padding: '5px'}}>
+                            {profile.initials}
+                        </div>
+                    </div>
+                    <div>
+                        <p>{profile.firstName}</p>
+                        <p>{profile.lastName}</p>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
         projects: state.firestore.ordered.events,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        profile: state.firebase.profile
     }
 }
 
@@ -73,6 +88,6 @@ const mapDispatchToProps = (dispatch) => {
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([
-        { collection: 'events' }
+        { collection: 'events', orderBy: ['createdAt', 'desc'] }
     ])
 )(Dashboard);
