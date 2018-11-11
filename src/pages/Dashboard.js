@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createEvent } from '../store/actions/eventActions';
+import { createEvent, deleteEvent, addParticipant } from '../store/actions/eventActions';
 import { signOut } from '../store/actions/authActions';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -24,8 +24,17 @@ class Dashboard extends Component {
         this.props.createEvent(this.state)
     }
 
+    deleteEventHandler = (pId) => {
+        this.props.deleteEvent(pId)
+    }
+
+    handleParticipant = (pId) => {
+        this.props.addParticipant(pId)
+    }
+
     render() {
         const { auth, profile } = this.props;
+        console.log(this.props)
 
         if (!auth.uid) {
             return <Redirect to="/login" />
@@ -41,10 +50,16 @@ class Dashboard extends Component {
                 <div>
                     {
                         this.props.projects && this.props.projects.map(project => {
+                            const pId = project.id;
                             return( 
                                 <div key={project.id}>
                                     <p><b>{project.title}</b></p>
                                     <p>{project.content}</p>
+                                    {
+                                        project.authorId === auth.uid &&
+                                        <p onClick={ () => this.deleteEventHandler(pId)} style={{ color: 'red' }}>delete event</p>
+                                    }
+                                    <p onClick={() => this.handleParticipant(pId)}>join event</p>
                                 </div>
                             )
                         })
@@ -81,6 +96,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         createEvent: (event) => dispatch(createEvent(event)),
+        deleteEvent: (event) => dispatch(deleteEvent(event)),
+        addParticipant: (event) => dispatch(addParticipant(event)),
         signOut: () => dispatch(signOut())
     }
 }

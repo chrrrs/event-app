@@ -14,6 +14,18 @@ const eventReducer = (state = initState, action) => {
         case 'CREATE_EVENT_ERROR':
             console.log('create project error', action.err)
             return state;
+        case 'DELETE_EVENT':
+            console.log('deleted event', action.event)
+            return state;
+        case 'DELETE_EVENT_ERROR':
+            console.log('delete event error', action.err)
+            return state;
+        case 'ADD_PARTICIPANT':
+            console.log('added participant', action.event)
+            return state;
+        case 'ADD_PARTICIPANT_ERROR':
+            console.log('added participant error', action.err)
+            return state;
         default:
             return state;
     }
