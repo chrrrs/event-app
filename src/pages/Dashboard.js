@@ -34,7 +34,7 @@ class Dashboard extends Component {
 
     render() {
         const { auth, profile } = this.props;
-        console.log(this.props)
+        // console.log(this.props)
 
         if (!auth.uid) {
             return <Redirect to="/login" />

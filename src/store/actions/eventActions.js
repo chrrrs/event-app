@@ -37,7 +37,7 @@ export const addParticipant = (event) => {
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
 
-        firestore.collection('events').doc(event).collection('participants').add({
+        firestore.collection('participants').doc(event).set({
             authorFirstName: profile.firstName,
             authorLastName: profile.lastName,
             authorId: authorId
