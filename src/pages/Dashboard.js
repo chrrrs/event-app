@@ -10,6 +10,7 @@ class Dashboard extends Component {
     state = {
         title: '',
         content: '',
+        file: ''
     }
 
     handleChange = (e) => {
@@ -18,10 +19,27 @@ class Dashboard extends Component {
         });
     }
 
+    handleFile = (e) => {
+        this.setState({ 
+            file: e.target.files[0] 
+        })
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
 
-        this.props.createEvent(this.state)
+        const { title, content, file } = this.state;
+        
+        if( title.length > 0 && content.length > 0 && file !== '') {
+            this.props.createEvent(this.state)
+    
+            this.setState({
+                title: '',
+                content: '',
+                file: ''
+            })
+        }
+
     }
 
     deleteEventHandler = (pId) => {
@@ -43,8 +61,9 @@ class Dashboard extends Component {
             <div>
                 This is the dashboard
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" id="title" onChange={this.handleChange} />
-                    <input type="text" id="content" onChange={this.handleChange} />
+                    <input type="file" id="file" onChange={this.handleFile} />
+                    <input type="text" id="title" onChange={this.handleChange} value={this.state.title} />
+                    <input type="text" id="content" onChange={this.handleChange} value={this.state.content} />
                     <button>create event</button>
                 </form>
                 <div>
@@ -53,6 +72,7 @@ class Dashboard extends Component {
                             const pId = project.id;
                             return( 
                                 <div key={project.id}>
+                                    <img src={project.image} alt={project.title} />
                                     <p><b>{project.title}</b></p>
                                     <p>{project.content}</p>
                                     {
@@ -85,7 +105,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    // console.log(state)
     return {
         projects: state.firestore.ordered.events,
         auth: state.firebase.auth,
