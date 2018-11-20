@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createEvent, deleteEvent, addParticipant } from '../store/actions/eventActions';
+import { createEvent, deleteEvent, addParticipant, removeParticipant } from '../store/actions/eventActions';
 import { signOut } from '../store/actions/authActions';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -50,6 +50,10 @@ class Dashboard extends Component {
         this.props.addParticipant(pId)
     }
 
+    removeParticipation = (pId) => {
+        this.props.removeParticipant(pId)
+    }
+
     render() {
         const { auth, profile } = this.props;
         // console.log(this.props)
@@ -79,7 +83,12 @@ class Dashboard extends Component {
                                         project.authorId === auth.uid &&
                                         <p onClick={ () => this.deleteEventHandler(pId)} style={{ color: 'red' }}>delete event</p>
                                     }
-                                    <p onClick={() => this.handleParticipant(pId)}>join event</p>
+                                    {
+                                        // project.participants.filter(e => e.userId === auth.uid).length > 0
+                                        project.participants.filter(e => e.userId === auth.uid).length > 0 ?
+                                        <p onClick={() => this.removeParticipation(pId)}>leave event</p> :
+                                        <p onClick={() => this.handleParticipant(pId)}>join event</p>
+                                    }
                                 </div>
                             )
                         })
@@ -118,6 +127,7 @@ const mapDispatchToProps = (dispatch) => {
         createEvent: (event) => dispatch(createEvent(event)),
         deleteEvent: (event) => dispatch(deleteEvent(event)),
         addParticipant: (event) => dispatch(addParticipant(event)),
+        removeParticipant: (event) => dispatch(removeParticipant(event)),
         signOut: () => dispatch(signOut())
     }
 }

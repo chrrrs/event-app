@@ -24,6 +24,7 @@ export const createEvent = (event) => {
                     authorLastName: profile.lastName,
                     authorId: authorId,
                     createdAt: new Date(),
+                    participants: []
                 }).then(() => {
                     dispatch({ type: 'CREATE_EVENT', event });
                 }).catch( err => {
@@ -50,16 +51,42 @@ export const addParticipant = (event) => {
     return (dispatch, getState, { getFirestore }) => {
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
-        const authorId = getState().firebase.auth.uid;
+        const userId = getState().firebase.auth.uid;
 
-        firestore.collection('participants').doc(event).set({
-            authorFirstName: profile.firstName,
-            authorLastName: profile.lastName,
-            authorId: authorId
+        const user = {
+            userFirstName: profile.firstName,
+            userLastName: profile.lastName,
+            userId: userId
+        }
+        
+        firestore.collection('events').doc(event).update({
+            participants: firestore.FieldValue.arrayUnion(user)
         }).then(() => {
             dispatch({ type: 'ADD_PARTICIPANT', profile })
         }).catch( err => {
             dispatch({ type: 'ADD_PARTICIPANT_ERROR', err })
+        })
+    }
+}
+
+export const removeParticipant = (event) => {
+    return (dispatch, getState, { getFirestore }) => {
+        const firestore = getFirestore();
+        const profile = getState().firebase.profile;
+        const userId = getState().firebase.auth.uid;
+
+        const user = {
+            userFirstName: profile.firstName,
+            userLastName: profile.lastName,
+            userId: userId
+        }
+
+        firestore.collection('events').doc(event).update({
+            participants: firestore.FieldValue.arrayRemove(user)
+        }).then(() => {
+            dispatch({ type: 'REMOVE_PARTICIPANT', profile })
+        }).catch(err => {
+            dispatch({ type: 'REMOVE_PARTICIPANT_ERROR', err })
         })
     }
 }
