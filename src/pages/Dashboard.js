@@ -6,6 +6,8 @@ import { signOut } from '../store/actions/authActions';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
+import { Button } from 'semantic-ui-react';
+
 class Dashboard extends Component {
     state = {
         title: '',
@@ -95,7 +97,7 @@ class Dashboard extends Component {
                     }
                 </div>
                 <Link to="/login">
-                    <div onClick={this.props.signOut}>Sign Out</div>
+                    <Button onClick={this.props.signOut}>Sign Out</Button>
                 </Link>
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '20%', alignItems: 'center', margin: '0 auto'}}>
                     <div>

@@ -10,6 +10,7 @@ import thunk from 'redux-thunk';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import cfgFirebase from './config/firebase';
+import 'semantic-ui-css/semantic.min.css';
 
 const store = createStore(rootReducer, 
     compose(

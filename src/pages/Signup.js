@@ -3,12 +3,16 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../store/actions/authActions';
 
+import { Button, Form, Checkbox } from 'semantic-ui-react'
+import { FormWrapper } from '../styles'
+
 class Signup extends Component {
     state = {
         email: '',
         password: '',
         firstName: '',
-        lastName: ''
+        lastName: '',
+        checked: false
     }
 
     handleChange = (event) => {
@@ -19,7 +23,10 @@ class Signup extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.signUp(this.state);
+
+        if(this.state.checked === true) {
+            this.props.signUp(this.state);
+        }
     }
 
     render() {
@@ -30,20 +37,35 @@ class Signup extends Component {
         }
 
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <input type="text" id="email" onChange={this.handleChange} />
-                    <input type="password" id="password" onChange={this.handleChange} />
-                    <input type="text" id="firstName" onChange={this.handleChange} />
-                    <input type="text" id="lastName" onChange={this.handleChange} />
-                    <button>signup</button>
-                </form>
+            <FormWrapper>
+                <Form onSubmit={this.handleSubmit} size="big">
+                    <Form.Field>
+                        <label>Email</label>
+                        <input type="text" id="email" placeholder="Email" onChange={this.handleChange} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>First Name</label>
+                        <input type="text" id="firstName" placeholder="firstName" onChange={this.handleChange} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Last Name</label>
+                        <input type="text" id="lastName" placeholder="lastName" onChange={this.handleChange} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Password</label>
+                        <input type="password" id="password" placeholder="password" onChange={this.handleChange} />
+                    </Form.Field>
+                    <Form.Field>
+                        <Checkbox onClick={() => {this.setState({checked: !this.state.checked})}}label='I agree to the Terms and Conditions' /> <a>read here</a>
+                    </Form.Field>
+                    <Button size="big">signup</Button>
+                </Form>
                 {
                     authError ?
                         <p style={{ color: 'red' }}>{authError}</p> :
                         null
                 }
-            </div>
+            </FormWrapper>
         )
     }
 }
