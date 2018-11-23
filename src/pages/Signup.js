@@ -56,7 +56,7 @@ class Signup extends Component {
                         <input type="password" id="password" placeholder="password" onChange={this.handleChange} />
                     </Form.Field>
                     <Form.Field>
-                        <Checkbox onClick={() => {this.setState({checked: !this.state.checked})}}label='I agree to the Terms and Conditions' /> <a>read here</a>
+                        <Checkbox onClick={() => {this.setState({checked: !this.state.checked})}}label='I agree to the Terms and Conditions' /> <a href="/">read here</a>
                     </Form.Field>
                     <Button size="big">signup</Button>
                 </Form>
