@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom"
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import CreateEvent from './pages/CreateEvent';
 
 class App extends Component {
 
@@ -17,6 +18,7 @@ class App extends Component {
             <Route exact path="/" component={Dashboard} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path="/create" component={CreateEvent} />
           </Switch>
         </div>
       </BrowserRouter>

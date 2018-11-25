@@ -29,6 +29,56 @@
     font-size: 30px;
 }
 
+.slick-slide {
+    margin: 20px 10px 0 -15px;
+}
+
+.slick-list {
+    max-height: 250px;
+    margin-bottom: 20px;
+    padding: 0 !important;
+}
+
+.event__card__container {
+    background-color: #FFF;
+    border-radius: 4px;
+    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    height: 130px;
+    display: flex;
+    overflow: hidden;
+    font-size: 1rem;
+}
+
+.event__card__container p {
+    margin-bottom: 0;
+}
+
+.event__card__container .event__card__image {
+    width: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.event__card__container .event__card__content__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* padding: 20px 40px 20px 20px; */
+    padding: 20px;
+    width: 100%;
+}
+
+.event__card__content__wrapper .sub__info__wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
 .App {
     overflow: hidden;
 }

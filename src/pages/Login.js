@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { signIn } from '../store/actions/authActions';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Redirect, Link } from 'react-router-dom';
 
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Label } from 'semantic-ui-react'
 import { FormWrapper } from '../styles'
 
 class Login extends Component {
@@ -42,13 +42,18 @@ class Login extends Component {
                         <label>Password</label>
                             <input type="password" id="password" placeholder="password" onChange={this.handleChange}/>
                     </Form.Field>
-                    <Button size="big">Login</Button>
+                    <Button size="big">Login</Button> 
+                    {
+                        authError ? 
+                            <span style={{ color: 'red' }}>
+                                <Label color="red">{authError}</Label>
+                            </span>:
+                        null
+                    }
+                    <div>
+                        <Link to="/signup">Not a user, click here to sign up.</Link>
+                    </div>
                 </Form>
-                {
-                    authError ? 
-                    <p style={{ color: 'red' }}>{authError}</p>:
-                    null
-                }
             </FormWrapper>
         )
     }
