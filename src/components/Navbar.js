@@ -36,8 +36,14 @@ class Navbar extends Component {
                 return <ActivityButton onClick={this.props.submit}>
                             <Icon className="icon__check" size="large" />
                         </ActivityButton>
-            case test:
-                return <ActivityButton onClick={this.props.submit}></ActivityButton>
+            case '/points':
+                return <ActivityButton onClick={this.props.submit}>
+                            <Icon className="" size="large" />
+                        </ActivityButton>
+            case '/user':
+                return <ActivityButton onClick={this.props.submit}>
+                            <Icon className="" size="large" />
+                        </ActivityButton>
             default:
                 return <ActivityButton hello></ActivityButton>
         }
@@ -62,7 +68,7 @@ class Navbar extends Component {
                     <Menu.Item
                         name='point'
                     >
-                        <Link to="/login">
+                        <Link to="/">
                             <Icon className="icon__location" size="large"/>
                         </Link>
                     </Menu.Item>
@@ -76,13 +82,17 @@ class Navbar extends Component {
                     <Menu.Item
                         name='trophy'
                     >
-                        <Icon className="icon__points" size="large"/>
+                        <Link to="/points">
+                            <Icon className="icon__points" size="large"/>
+                        </Link>
                     </Menu.Item>
 
                     <Menu.Item
                         name='user'
                     >
-                        <Icon className="icon__user" size="large"/>
+                        <Link to="/user">
+                            <Icon className="icon__user" size="large"/>
+                        </Link>
                     </Menu.Item>
                 </Menu>
             </React.Fragment>
