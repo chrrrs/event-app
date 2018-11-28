@@ -6,14 +6,14 @@ export default class EventCard extends Component {
     const { event } = this.props;
 
     return (
-      <div className="event__card__container">
+      <div className="event__card__container" onClick={this.props.goTo}>
         <Lazyload throttle={200} height={130}>
           <img className="event__card__image" src={event.image} alt="" />
         </Lazyload>
         <div className="event__card__content__wrapper">
           <div>
             <p>{event.title}</p>
-            <p>{event.content}</p>
+            <p><b>Organizer</b> {event.organization && event.organization.length > 0 ? event.organization : `${event.authorFirstName} ${event.authorLastName}`}</p>
           </div>
           <div className="sub__info__wrapper">
             <div>

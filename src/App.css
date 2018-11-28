@@ -79,6 +79,68 @@
     justify-content: space-between;
 }
 
+.fake__background {
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+}
+
+.modal__view {
+    background-color: #FCFCFC;
+    width: 100vw;
+    height: auto;
+    max-height: 80vh;
+    z-index: 2;
+    position: absolute;
+    bottom: 0;
+    border-radius: 8px 8px 0 0;
+    padding-top: 40px;
+    /* overflow-x: hidden;  */
+}
+
+.modal__view .container {
+    padding-bottom: 7rem;
+}
+
+.icon__home:after {
+    content: url('./assets/icons/home.svg');
+}
+
+.icon__location:after {
+    content: url('./assets/icons/location.svg');
+}
+
+.icon__points:after {
+    content: url('./assets/icons/points.svg');
+}
+
+.icon__user:after {
+    content: url('./assets/icons/user.svg');
+}
+
+.icon__plus:after {
+    content: url('./assets/icons/plus.svg');
+}
+.icon__plus.white {
+    color: white;
+}
+
+.icon__cross:after {
+    content: url('./assets/icons/cross.svg');
+}
+
+.icon__check:after {
+    content: url('./assets/icons/check.svg');
+}
+
+i.icon {
+    margin: 0 !important
+}
+
+
 .App {
     overflow: hidden;
 }

@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CreateEvent from './pages/CreateEvent';
+import Event from './pages/Event';
 
 class App extends Component {
 
@@ -19,6 +20,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/create" component={CreateEvent} />
+            <Route exact path="/event/:id" component={Event} />
           </Switch>
         </div>
       </BrowserRouter>

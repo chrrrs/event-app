@@ -2,22 +2,42 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Menu, Icon, Button } from 'semantic-ui-react';
+import { Menu, Icon } from 'semantic-ui-react';
 import { ActivityButton } from '../styles';
 
 class Navbar extends Component {
+    state = {
+        activeItem: ''
+    }
+
     handleToCreate = () => {
         this.props.pathObject.push('/create')
     }
 
     setActivityButton = () => {
         const { pathname } = this.props.pathObject.location
+        let test = ''
+        if (pathname.includes('event') && this.props.isAttending === false) {
+            return <ActivityButton onClick={this.props.submit}>
+                        <Icon className="icon__check" size="large" />
+                    </ActivityButton>
+        } else if (pathname.includes('event') && this.props.isAttending === true) {
+            return <ActivityButton onClick={this.props.submit}>
+                        <Icon className="icon__cross" size="large" />
+                    </ActivityButton>
+        }
 
         switch(pathname) {
             case '/':
-                return <ActivityButton createPage onClick={this.handleToCreate}></ActivityButton>
+                return <ActivityButton onClick={this.handleToCreate}>
+                            <Icon className="icon__plus" size="large" />
+                        </ActivityButton>
             case '/create':
-                return <ActivityButton createEvent onClick={this.handleToCreate}></ActivityButton>
+                return <ActivityButton onClick={this.props.submit}>
+                            <Icon className="icon__check" size="large" />
+                        </ActivityButton>
+            case test:
+                return <ActivityButton onClick={this.props.submit}></ActivityButton>
             default:
                 return <ActivityButton hello></ActivityButton>
         }
@@ -35,7 +55,7 @@ class Navbar extends Component {
                 <Menu fluid borderless widths="5" className="navbar__fix">
                     <Menu.Item name='home'>
                         <Link to="/">
-                            <Icon name='home' size="large"/>
+                            <Icon className="icon__home" size="large"/>
                         </Link>
                     </Menu.Item>
 
@@ -43,7 +63,7 @@ class Navbar extends Component {
                         name='point'
                     >
                         <Link to="/login">
-                            <Icon name='point' size="large"/>
+                            <Icon className="icon__location" size="large"/>
                         </Link>
                     </Menu.Item>
 
@@ -56,13 +76,13 @@ class Navbar extends Component {
                     <Menu.Item
                         name='trophy'
                     >
-                        <Icon name='trophy' size="large"/>
+                        <Icon className="icon__points" size="large"/>
                     </Menu.Item>
 
                     <Menu.Item
                         name='user'
                     >
-                        <Icon name='user' size="large"/>
+                        <Icon className="icon__user" size="large"/>
                     </Menu.Item>
                 </Menu>
             </React.Fragment>

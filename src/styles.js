@@ -8,22 +8,31 @@ export const FormWrapper = styled.div`
 
 export const ActivityButton = styled.div`
     padding: 20px;
-
-    &:after {
-        background-color: #0066FF;
-        padding: 20px;
-        border-radius: 100px;
-    }
+    background-color: #0066FF;
+    padding: 20px;
+    border-radius: 100px;
 
     ${props => props.createPage && `
         &:after {
-            content: "🦄";
+            content: "➕";
         }
     `}
 
     ${props => props.createEvent && `
         &:after {
-            content: "📋";
+            content: "✔️";
+        }
+    `}
+
+    ${props => props.joinEvent && `
+        &:after {
+            content: "✔️";
+        }
+    `}
+
+    ${props => props.leaveEvent && `
+        &:after {
+            content: "❌";
         }
     `}
 

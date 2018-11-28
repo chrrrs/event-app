@@ -22,6 +22,7 @@ export const createEvent = (event) => {
                     image: downloadURL,
                     authorFirstName: profile.firstName,
                     authorLastName: profile.lastName,
+                    organization: profile.organization,
                     authorId: authorId,
                     createdAt: new Date(),
                     participants: []
@@ -56,6 +57,7 @@ export const addParticipant = (event) => {
         const user = {
             userFirstName: profile.firstName,
             userLastName: profile.lastName,
+            organization: profile.organization,
             userId: userId
         }
         
@@ -78,6 +80,7 @@ export const removeParticipant = (event) => {
         const user = {
             userFirstName: profile.firstName,
             userLastName: profile.lastName,
+            organization: profile.organization,
             userId: userId
         }
 

@@ -12,6 +12,7 @@ class Signup extends Component {
         password: '',
         firstName: '',
         lastName: '',
+        organization: '',
         checked: false
     }
 
@@ -42,6 +43,10 @@ class Signup extends Component {
                     <Form.Field>
                         <label>Email</label>
                         <input type="text" id="email" placeholder="Email" onChange={this.handleChange} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Organization Name</label>
+                        <input type="text" id="organization" placeholder="Organization Name" onChange={this.handleChange} />
                     </Form.Field>
                     <Form.Field>
                         <label>First Name</label>
