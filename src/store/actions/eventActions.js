@@ -25,7 +25,24 @@ export const createEvent = (event) => {
                     organization: profile.organization,
                     authorId: authorId,
                     createdAt: new Date(),
-                    participants: []
+                    participants: [],
+                    challenges: [
+                        {
+                            challengeTitle: 'Attend in person',
+                            challengeDesc: 'Attend an event, get the event kode from the event organizer and earn some points ',
+                            points: 150
+                        },
+                        {
+                            challengeTitle: 'Meet a new person',
+                            challengeDesc: 'Meet a new person at the event, make a connection and get their code - earn some points and maybe you can get coffee together',
+                            points: 245
+                        },
+                        {
+                            challengeTitle: 'Buy something to drink',
+                            challengeDesc: 'Go get yourself something to drink and while you are at it, get the bartenderes code',
+                            points: 50
+                        }
+                    ]
                 }).then(() => {
                     dispatch({ type: 'CREATE_EVENT', event });
                 }).catch( err => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Container, Image } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import Navbar from '../components/Navbar';
 
 export default class Points extends Component {

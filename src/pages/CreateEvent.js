@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createEvent, deleteEvent, addParticipant } from '../store/actions/eventActions';
 
-import { Button, Container, Form, Input, Image, TextArea } from 'semantic-ui-react';
+import { Container, Form, Input, TextArea } from 'semantic-ui-react';
 import Navbar from '../components/Navbar';
 
 class CreateEvent extends Component {

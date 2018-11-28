@@ -16,7 +16,7 @@ class Navbar extends Component {
 
     setActivityButton = () => {
         const { pathname } = this.props.pathObject.location
-        let test = ''
+        
         if (pathname.includes('event') && this.props.isAttending === false) {
             return <ActivityButton onClick={this.props.submit}>
                         <Icon className="icon__check" size="large" />

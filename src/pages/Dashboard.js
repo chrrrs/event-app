@@ -68,7 +68,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { auth, profile } = this.props;
+        const { auth } = this.props;
 
         var settings = {
             infinite: false,
