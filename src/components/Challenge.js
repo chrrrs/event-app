@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { completeChallenge, addPoints } from '../store/actions/eventActions';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 import { Accordion, Icon, Input, Button, Form } from 'semantic-ui-react';
 
 class Challenge extends Component {
-    state = { activeIndex: 1 }
+    state = { 
+        activeIndex: 1,
+        userCheck: '' 
+    }
 
     handleClick = (e, titleProps) => {
         const { index } = titleProps
@@ -15,14 +20,24 @@ class Challenge extends Component {
         this.setState({ activeIndex: newIndex })
     }
 
+    handleChange = (e) => {
+        this.setState({
+            userCheck: e.target.value
+        })
+    }
+
     handleCompletedChallenge = (eventID, challengeID, userID, points) => {
-        this.props.completeChallenge(eventID, challengeID)
-        this.props.addPoints(userID, points)
+        const { userCheck } = this.state;
+
+        if(this.props.users[userCheck]) {
+            this.props.completeChallenge(eventID, challengeID)
+            this.props.addPoints(userID, points)
+        }
     }
 
     render() {
         const { activeIndex } = this.state
-        const { challenge, eventID, auth } = this.props
+        const { challenge, eventID, auth, isAttending, isCompleted } = this.props
 
         return (
             <Accordion fluid styled>
@@ -38,9 +53,9 @@ class Challenge extends Component {
                     {
                         challenge.completed ?
                         <p>Great job, you already finished this challenge!</p> :
-                            <Form onSubmit={() => this.handleCompletedChallenge(eventID, challenge.id, auth.uid, challenge.points)}>
-                            <Input placeholder="insert code" />
-                            <Button>Check</Button>
+                        <Form onSubmit={() => this.handleCompletedChallenge(eventID, challenge.id, auth.uid, challenge.points)}>
+                            <Input placeholder="insert code" disabled={isCompleted.length > 0 || !isAttending} onChange={this.handleChange}/>
+                            <Button disabled={isCompleted.length > 0 || !isAttending}>Check</Button>
                         </Form>
                     }
                 </Accordion.Content>
@@ -51,6 +66,8 @@ class Challenge extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        event: state.firestore.data.events,
+        users: state.firestore.data.users,
         auth: state.firebase.auth,
     }
 }
@@ -62,4 +79,9 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Challenge)
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps), 
+    firestoreConnect([
+        { collection: 'users' }
+    ])
+)(Challenge)

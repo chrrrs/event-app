@@ -1,22 +1,20 @@
 import React, { Component } from 'react'
-// import { connect } from 'react-redux';
-// import { completeChallenge } from '../store/actions/eventActions';
 
 import { Tab } from 'semantic-ui-react';
 import Challenge from '../components/Challenge'
+import ContentTab from '../components/ContentTab'
 
 
 class Tabs extends Component {
-  // handleCompletedChallenge = () => {
-
-  // }
 
   render() {
-    const { data, eventID } = this.props;
+    const { data, eventID, isAttending, participant } = this.props;
+    // console.log(participant[0].challenges.filter(e => e === challenge.id))
+    console.log(participant[0])
 
     const panes = [
-      { menuItem: 'Description', render: () => <Tab.Pane attached={false}>{data.content}</Tab.Pane> },
-      { menuItem: 'Challenges', render: () => <Tab.Pane attached={false}>{data.challenges && data.challenges.map(challenge => <Challenge key={challenge.id} challenge={challenge} eventID={eventID} />)}</Tab.Pane> },
+      { menuItem: 'Description', render: () => <Tab.Pane attached={false}><ContentTab event={data} /></Tab.Pane> },
+      { menuItem: 'Challenges', render: () => <Tab.Pane attached={false}>{data.challenges && data.challenges.map(challenge => <Challenge key={challenge.id} challenge={challenge} eventID={eventID} isAttending={isAttending} isCompleted={participant[0] !== undefined && participant[0].challenges.filter(e => e === challenge.id)} />)}</Tab.Pane> },
     ]
     return (
       <Tab menu={{ secondary: true }} panes={panes} />
@@ -24,11 +22,4 @@ class Tabs extends Component {
   }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     completeChallenge: (event, challenge) => dispatch(completeChallenge(event)),
-//   }
-// }
-
-// export default connect(null, mapDispatchToProps)(Tabs)
 export default Tabs

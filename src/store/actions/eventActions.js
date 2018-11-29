@@ -24,25 +24,27 @@ export const createEvent = (event) => {
                     authorLastName: profile.lastName,
                     organization: profile.organization,
                     authorId: authorId,
+                    location: event.location,
+                    category: event.category,
                     createdAt: new Date(),
                     participants: [],
                     challenges: [
                         {
                             id: 'KGMdpefsL575',
                             challengeTitle: 'Attend in person',
-                            challengeDesc: 'Attend an event, get the event kode from the event organizer and earn some points ',
+                            challengeDesc: 'Attend an event, get the event kode from the event organizer and earn some points.',
                             points: 150,
                         },
                         {
                             id: 'MVLSDdfs743',
                             challengeTitle: 'Meet a new person',
-                            challengeDesc: 'Meet a new person at the event, make a connection and get their code - earn some points and maybe you can get coffee together',
+                            challengeDesc: 'Meet a new person at the event, make a connection and get their code - earn some points and maybe you can get coffee together.',
                             points: 245,
                         },
                         {
                             id: 'sdaGSmk28',
                             challengeTitle: 'Buy something to drink',
-                            challengeDesc: 'Go get yourself something to drink and while you are at it, get the bartenderes code',
+                            challengeDesc: 'Go get yourself something to drink and while you are at it, get the bartenderes code.',
                             points: 50,
                         }
                     ]
@@ -114,9 +116,9 @@ export const removeParticipant = (event) => {
                 firestore.collection('events').doc(event).update({
                     participants: firestore.FieldValue.arrayRemove(participantObject) 
                 }).then(() => {
-                    dispatch({ type: 'COMPLETED_CHALLENGE', profile })
+                    dispatch({ type: 'REMOVE_PARTICIPANT', profile })
                 }).catch(err => {
-                    dispatch({ type: 'COMPLETED_CHALLENGE_ERROR', err })
+                    dispatch({ type: 'REMOVE_PARTICIPANT_ERROR', err })
                 })
             })
     }

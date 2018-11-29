@@ -7,7 +7,7 @@ export default class EventCard extends Component {
 
     return (
       <div className="event__card__container" onClick={this.props.goTo}>
-        <Lazyload throttle={200} height={130}>
+        <Lazyload throttle={150} height={'100%'}>
           <img className="event__card__image" src={event.image} alt="" />
         </Lazyload>
         <div className="event__card__content__wrapper">
@@ -22,11 +22,11 @@ export default class EventCard extends Component {
             </div>
             <div>
               <p>Category</p>
-              <p>sport</p>
+              <p>{event.category && event.category.length > 0 ? event.category : '...'}</p>
             </div>
             <div>
               <p>Location</p>
-              <p>Odense C</p>
+              <p>{event.location && event.location.length > 0 ? event.location : '...'}</p>
             </div>
           </div>
         </div>
