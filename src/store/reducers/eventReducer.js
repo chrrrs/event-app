@@ -32,6 +32,24 @@ const eventReducer = (state = initState, action) => {
         case 'REMOVE_PARTICIPANT_ERROR':
             console.log('removed participant error', action.err)
             return state;
+        case 'COMPLETED_CHALLENGE':
+            console.log('completed challenge', action.event)
+            return state;
+        case 'COMPLETED_CHALLENGE_ERROR':
+            console.log('completed challenge error', action.err)
+            return state;
+        case 'ADD_POINTS':
+            console.log('added points', action.event)
+            return state;
+        case 'ADD_POINTS_ERROR':
+            console.log('added points error', action.err)
+            return state;
+        case 'REMOVE_POINTS':
+            console.log('removed points', action.event)
+            return state;
+        case 'REMOVE_POINTS_ERROR':
+            console.log('removed points error', action.err)
+            return state;
         default:
             return state;
     }

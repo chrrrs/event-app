@@ -118,7 +118,7 @@ class Dashboard extends Component {
                         <button>create event</button>
                     </form> */}
                     <div>
-                        <h3>Begivenheder</h3>
+                        <h3>Events</h3>
                         {
                             this.props.projects && this.props.projects.map(project => {
                                 const projectID = project.id

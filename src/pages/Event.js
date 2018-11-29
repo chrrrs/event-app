@@ -26,7 +26,7 @@ class Event extends Component {
     render() {
         const id = this.props.match.params.id
         const { event, auth } = this.props
-
+        
         return (
             <React.Fragment>
                 <Container>
@@ -45,11 +45,11 @@ class Event extends Component {
                         {
                             event && 
                             <React.Fragment>
-                                <img src={event[id].image} alt="" style={{ marginTop: '-40px', marginBottom: '20px', objectFit: 'cover', width: '100vw', height: '200px'}} />
+                                <img src={event[id].image} alt="" style={{ marginTop: '-40px', marginBottom: '20px', objectFit: 'cover', width: '100vw', height: '200px', borderRadius: '4px 4px 0 0' }} />
                                 <Container>
                                     <h3>{event[id].title}</h3>
                                     <p><b>Organizer</b> {event[id].organization && event[id].organization.length > 0 ? event[id].organization : `${event[id].authorFirstName} ${event[id].authorLastName}` }</p>
-                                    <Tabs data={event[id]} />
+                                    <Tabs data={event[id]} eventID={id} />
                                     {
                                         event[id].participants.length > 0 ? 
                                         <p>Attending: {event[id].participants.length}</p> :
