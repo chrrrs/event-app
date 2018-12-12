@@ -42,7 +42,7 @@ class Login extends Component {
                         <label>Password</label>
                             <input type="password" id="password" placeholder="password" onChange={this.handleChange}/>
                     </Form.Field>
-                    <Button size="big">Login</Button> 
+                    <Button size="big">Login</Button><span><Link to="/signup">Not a user, click here to sign up.</Link></span>
                     {
                         authError ? 
                             <span style={{ color: 'red' }}>
@@ -50,9 +50,6 @@ class Login extends Component {
                             </span>:
                         null
                     }
-                    <div>
-                        <Link to="/signup">Not a user, click here to sign up.</Link>
-                    </div>
                 </Form>
             </FormWrapper>
         )

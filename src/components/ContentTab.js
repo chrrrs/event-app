@@ -7,24 +7,24 @@ const ContentTab = (props) => (
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px'}}>
             <div>
-                <p>Date</p>
-                <p>fill</p>
+                <b>Attending:</b>
             </div>
             <div>
-                <p>Category</p>
-                <p>{props.event.category && props.event.category.length > 0 ? props.event.category : '...'}</p>
-            </div>
-            <div>
-                <p>Location</p>
-                <p>{props.event.location && props.event.location.length > 0 ? props.event.location : '...'}</p>
+                {props.event.participants && props.event.participants.length > 0 ? props.event.participants.length : 'You can be the first attendee!'}
             </div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px'}}>
             <div>
-                Attending:
+                <b><p>Date</p></b>
+                <p>fill</p>
             </div>
             <div>
-                {props.event.participants && props.event.participants.length > 0 ? props.event.participants.length : 'You can be the first attendee!'}
+                <b><p>Category</p></b>
+                <p>{props.event.category && props.event.category.length > 0 ? props.event.category : '...'}</p>
+            </div>
+            <div>
+                <b><p>Location</p></b>
+                <p>{props.event.location && props.event.location.length > 0 ? props.event.location : '...'}</p>
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 
 import Dashboard from './pages/Dashboard';
+import Locations from './pages/Locations';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CreateEvent from './pages/CreateEvent';
@@ -26,6 +27,7 @@ class App extends Component {
             <Route exact path="/event/:id" component={Event} />
             <Route exact path="/points" component={Points} />
             <Route exact path="/user" component={User} />
+            <Route exact path="/location" component={Locations} />
             <Route component={NoMatch} />
           </Switch>
         </div>

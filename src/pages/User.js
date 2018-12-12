@@ -1,10 +1,22 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { signOut } from '../store/actions/authActions';
 
-import { Container } from 'semantic-ui-react';
+import { Container, Button, List } from 'semantic-ui-react';
 import Navbar from '../components/Navbar';
 
-export default class User extends Component {
+class User extends Component {
+    state = {
+        open: false
+    }
+
+    revealDelete = () => {
+        this.setState({ open: !this.state.open })
+    }
+
     render() {
+        const { profile } = this.props;
         return (
             <React.Fragment>
                 <Container>
@@ -13,9 +25,32 @@ export default class User extends Component {
                         <h2 style={{ marginTop: '0', fontSize: '1.7rem', fontWeight: '800' }}>Connect</h2>
                     </div>
                 </Container>
-                <Container>
-                    <div style={{ backgroundColor: '#0066FF', width: '40px', height: '40px', borderRadius: '100px'}}>
-
+                <Container style={{ position: 'absolute', bottom: '120px' }}>
+                    <h3>Profile</h3>
+                    <List>
+                        <List.Item>
+                            <List.Content>
+                                <List.Header as='a'>{`${profile.firstName} ${profile.lastName}`}</List.Header>
+                                <List.Description>
+                                    You have {' '}
+                                    <a href="/points">
+                                        <b>{profile.points} points</b>
+                                    </a>{' '}
+                                    to spare, visit the points store to gain discounts.
+                                </List.Description>
+                            </List.Content>
+                        </List.Item>
+                    </List>
+                    <p onClick={this.revealDelete}>Press here to delete your account.</p>
+                    {
+                        this.state.open && 
+                        <Button negative fluid style={{ marginBottom: '20px' }}>Delete Account</Button>
+                    }
+                    <Button disabled fluid style={{ marginBottom: '20px', backgroundColor: '#3b5998', color: 'white' }}>Connect with Facebook</Button>
+                    <div>
+                        <Link to="/login">
+                            <Button onClick={this.props.signOut} fluid>Sign Out</Button>
+                        </Link>
                     </div>
                 </Container>
                 <Navbar pathObject={this.props.history} />
@@ -23,3 +58,17 @@ export default class User extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        profile: state.firebase.profile
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signOut: () => dispatch(signOut())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(User)

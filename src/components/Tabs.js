@@ -9,8 +9,6 @@ class Tabs extends Component {
 
   render() {
     const { data, eventID, isAttending, participant } = this.props;
-    // console.log(participant[0].challenges.filter(e => e === challenge.id))
-    console.log(participant[0])
 
     const panes = [
       { menuItem: 'Description', render: () => <Tab.Pane attached={false}><ContentTab event={data} /></Tab.Pane> },

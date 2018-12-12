@@ -9,7 +9,15 @@ import { Accordion, Icon, Input, Button, Form } from 'semantic-ui-react';
 class Challenge extends Component {
     state = { 
         activeIndex: 1,
-        userCheck: '' 
+        userCheck: '',
+        random_color: '' 
+    }
+
+    componentDidMount() {
+        const colors = ['#9A86DC', '#83E3D8', '#F6C1E8', '#9BAEF4', '#FD7D76', '#FFCF92', '#89C4E2', '#DBD3F7'];
+        const random_color = colors[Math.floor(Math.random() * colors.length)];
+
+        this.setState({ random_color })
     }
 
     handleClick = (e, titleProps) => {
@@ -41,17 +49,17 @@ class Challenge extends Component {
 
         return (
             <Accordion fluid styled>
-                <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
-                    {challenge.completed ? <Icon name='check' /> : null}
+                <Accordion.Title style={{ backgroundColor: this.state.random_color, borderRadius: '4px 4px 0 0' }} active={activeIndex === 0} index={0} onClick={this.handleClick}>
+                    {isCompleted.length > 0 ? <Icon name='check' /> : null}
                     {challenge.challengeTitle}
                     <Icon name='dropdown' />
                 </Accordion.Title>
-                <Accordion.Content active={activeIndex === 0}>
+                <Accordion.Content style={{ borderRadius: '0 0 4px 4px', backgroundColor: this.state.random_color, opacity: '.75', color: 'white', fontWeight: '600' }} active={activeIndex === 0}>
                     <p>{challenge.challengeDesc}</p>
                     <div></div>
                     <p>Award: {challenge.points} points</p>
                     {
-                        challenge.completed ?
+                        isCompleted.length > 0 ?
                         <p>Great job, you already finished this challenge!</p> :
                         <Form onSubmit={() => this.handleCompletedChallenge(eventID, challenge.id, auth.uid, challenge.points)}>
                             <Input placeholder="insert code" disabled={isCompleted.length > 0 || !isAttending} onChange={this.handleChange}/>

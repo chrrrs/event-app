@@ -39,6 +39,10 @@
     padding: 0 !important;
 }
 
+.slick-dots li.slick-active button:before {
+    color: #FF2D59;
+}
+
 .event__card__container {
     background-color: #FFF;
     border-radius: 4px;
@@ -50,7 +54,7 @@
     height: 130px;
     display: flex;
     overflow: hidden;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .event__card__container p {
@@ -58,7 +62,8 @@
 }
 
 .event__card__container .event__card__image {
-    width: 50%;
+    max-width: 30%;
+    min-width: 30%;
     background-repeat: no-repeat;
     background-position: center;
     object-fit: cover;
@@ -80,67 +85,107 @@
 }
 
 .fake__background {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.3); 
     width: 100vw;
-    height: 100vh;
+    height: 25vh;
     z-index: 1;
     position: absolute;
     top: 0;
+    cursor: pointer;
 }
 
 .modal__view {
     background-color: #FCFCFC;
     width: 100vw;
     height: auto;
-    max-height: 80vh;
     z-index: 2;
     position: absolute;
-    bottom: 0;
+    top: 20vh;
     border-radius: 8px 8px 0 0;
-    /* overflow-x: hidden;  */
 }
 
 .modal__view .container {
     padding-bottom: 7rem;
 }
 
-.icon__home:after {
-    content: url('./assets/icons/home.svg');
-}
-
-.icon__location:after {
-    content: url('./assets/icons/location.svg');
-}
-
-.icon__points:after {
-    content: url('./assets/icons/points.svg');
-}
-
-.icon__user:after {
-    content: url('./assets/icons/user.svg');
-}
-
-.icon__plus:after {
-    content: url('./assets/icons/plus.svg');
-}
-.icon__plus.white {
-    color: white;
-}
-
-.icon__cross:after {
-    content: url('./assets/icons/cross.svg');
-}
-
-.icon__check:after {
-    content: url('./assets/icons/check.svg');
+.ui.secondary.menu .active.item {
+    background: #FF2D59 !important;
+    color: white !important;
+    font-weight: 600;
 }
 
 i.icon {
     margin: 0 !important
 }
 
+.truncate__text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    max-width: 95%;
+}
+
+.ui.segment.tab.active {
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+.ui.fluid.accordion {
+    margin-bottom: 20px;
+}
+
+.ui.styled.accordion .title {
+    color: white !important;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (min-width: 500px) {
+    .slider__image {
+        height: 100% !important;
+        width: auto !important;
+        padding-right: 2rem;
+    }
+}
+
+.back__button {
+    background-color: #FCFCFC;
+    border-radius: 100px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 9;
+    padding: 5px 5px 0 5px;
+    cursor: pointer;
+}
+
+.points__container {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 65vh;
+}
+
+.points__container .points {
+    margin-top: 45%;
+    color: #FF4789;
+}
+
+.points__container .points h1 {
+    font-size: 4rem;
+}
+
+.points__container .points span {
+    margin-top: 50%;
+    font-size: 1rem;
+}
 
 .App {
     overflow: hidden;
     background-color: #fcfcfc;
+    min-height: 100vh;
 }

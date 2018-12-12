@@ -4,10 +4,12 @@ import { deleteEvent, addParticipant, removeParticipant } from '../store/actions
 import { signOut } from '../store/actions/authActions';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import Slider from 'react-slick';
 
-import { Button, Container, Form, Input } from 'semantic-ui-react';
+import { Button, Container, Form, Input, Image } from 'semantic-ui-react';
 import Navbar from '../components/Navbar';
 import Tabs from '../components/Tabs';
+import BackButton from '../components/BackButton';
 
 class Event extends Component {
     componentDidMount() {
@@ -28,15 +30,27 @@ class Event extends Component {
     }
 
     goBack = () => {
-        this.props.history.push('/')
+        this.props.history.goBack()
     }
 
     render() {
         const id = this.props.match.params.id
         const { event, auth } = this.props
-        
+
+        const settings = {
+            infinite: false,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            lazyLoad: true,
+            centerMode: true,
+            dots: true
+        };
+
         return (
             <React.Fragment>
+                <BackButton back={this.goBack} />
                 <div style={{ position: 'fixed', width: '100%'}}>
                     <Container>
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '10px auto' }}>
@@ -48,6 +62,22 @@ class Event extends Component {
                                 <Input type="search" icon="search" />
                             </Form.Field>
                         </Form>
+                    </Container>
+                    <Container fluid>
+                        <Slider {...settings}>
+                            <Container>
+                                <div>
+                                    <span style={{ position: 'absolute', zIndex: '999', padding: '4px 10px', margin: '10px', backgroundColor: '#000000c4', fontWeight: '800', borderRadius: '4px', color: 'white', fontSize: '0.8rem' }}>Featured</span>
+                                    <Image src="https://images.pexels.com/photos/295047/pexels-photo-295047.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" srcSet="" />
+                                </div>
+                            </Container>
+                            <Container>
+                                <div>
+                                    <span style={{ position: 'absolute', zIndex: '999', padding: '4px 10px', margin: '10px', backgroundColor: '#000000c4', fontWeight: '800', borderRadius: '4px', color: 'white', fontSize: '0.8rem' }}>Featured</span>
+                                    <Image src="https://images.pexels.com/photos/1443657/pexels-photo-1443657.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="" srcSet="" />
+                                </div>
+                            </Container>
+                        </Slider>
                     </Container>
                 </div>
                 <div className="fake__background" onClick={this.goBack}>

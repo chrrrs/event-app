@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { signUp } from '../store/actions/authActions';
 
 import { Button, Form, Checkbox } from 'semantic-ui-react'
@@ -63,7 +63,7 @@ class Signup extends Component {
                     <Form.Field>
                         <Checkbox onClick={() => {this.setState({checked: !this.state.checked})}}label='I agree to the Terms and Conditions' /> <a href="/">read here</a>
                     </Form.Field>
-                    <Button size="big">signup</Button>
+                    <Button size="big">signup</Button> <span><Link to="/">Go back</Link></span>
                 </Form>
                 {
                     authError ?
