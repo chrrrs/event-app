@@ -13,10 +13,9 @@ export default class NoMatch extends Component {
                         <h2 style={{ marginTop: '0', fontSize: '1.7rem', fontWeight: '800' }}>Connect</h2>
                     </div>
                     <div>
-                        <h1>Hov, noget gik galt!</h1>
-                        <p>Det ser ud til noget ikke gik som forventet, brug navigationen i bunden til at finde det du søger</p>
+                        <h1>Whoops, something didn't go as planned!</h1>
+                        <p>Looks like there might have been a mistake, use the navigation bar at the bottom, to find your way back.</p>
                     </div>
-
                 </Container>
                 <Navbar pathObject={this.props.history} />
             </React.Fragment>

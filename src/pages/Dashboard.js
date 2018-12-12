@@ -113,7 +113,7 @@ class Dashboard extends Component {
                                 return (
                                     <Container key={project.id}>
                                         <div>
-                                            <span style={{ position: 'absolute', zIndex: '999', padding: '4px 10px', margin: '10px', backgroundColor: '#000000c4', fontWeight: '800', borderRadius: '4px', color: 'white', fontSize: '0.8rem'}}>Featured</span>
+                                            <span className="featured__badge">Featured</span>
                                             <Lazyload height='100%'>
                                                 <Image className="slider__image" src={project.image} alt={project.title} onClick={() => this.goToSingleEvent(projectID)} style={{ height: '150px', width: '250px', objectFit: 'cover', borderRadius: '4px' }}/>
                                             </Lazyload>

@@ -54,7 +54,7 @@ class Points extends Component {
                             {profile.points && profile.points.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") }  
                             <span>points</span>
                         </h1>
-                        <p>*DESCRIPTIVE TEXT*</p>
+                        <p>Select a user or company profile down below, select the amount you wish to spend and click send. Your points will arrive shortly to its intended user and you can enjoy one of our many discounts.</p>
                     </div>
                     <div>
                         <Form>

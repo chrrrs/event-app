@@ -1,11 +1,11 @@
 import React from 'react'
 
 const ContentTab = (props) => (
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+    <div className="content__tab__container">
         <div>
             {props.event && props.event.content}
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px'}}>
+        <div className="details">
             <div>
                 <b>Attending:</b>
             </div>
@@ -13,10 +13,10 @@ const ContentTab = (props) => (
                 {props.event.participants && props.event.participants.length > 0 ? props.event.participants.length : 'You can be the first attendee!'}
             </div>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px'}}>
+        <div className="details">
             <div>
                 <b><p>Date</p></b>
-                <p>fill</p>
+                <p>...</p>
             </div>
             <div>
                 <b><p>Category</p></b>

@@ -67,13 +67,13 @@ class Event extends Component {
                         <Slider {...settings}>
                             <Container>
                                 <div>
-                                    <span style={{ position: 'absolute', zIndex: '999', padding: '4px 10px', margin: '10px', backgroundColor: '#000000c4', fontWeight: '800', borderRadius: '4px', color: 'white', fontSize: '0.8rem' }}>Featured</span>
+                                    <span className="featured__badge">Featured</span>
                                     <Image src="https://images.pexels.com/photos/295047/pexels-photo-295047.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" srcSet="" />
                                 </div>
                             </Container>
                             <Container>
                                 <div>
-                                    <span style={{ position: 'absolute', zIndex: '999', padding: '4px 10px', margin: '10px', backgroundColor: '#000000c4', fontWeight: '800', borderRadius: '4px', color: 'white', fontSize: '0.8rem' }}>Featured</span>
+                                    <span className="featured__badge">Featured</span>
                                     <Image src="https://images.pexels.com/photos/1443657/pexels-photo-1443657.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="" srcSet="" />
                                 </div>
                             </Container>
@@ -86,14 +86,14 @@ class Event extends Component {
                     {
                         event && 
                         <React.Fragment>
-                            <img src={event[id].image} alt="" style={{ marginBottom: '20px', objectFit: 'cover', width: '100vw', height: '200px', borderRadius: '4px 4px 0 0' }} />
+                            <img src={event[id].image} alt="" className="event__image"/>
                             <Container>
                                 <h3>{event[id].title}</h3>
                                 <p><b>Organizer</b> {event[id].organization && event[id].organization.length > 0 ? event[id].organization : `${event[id].authorFirstName} ${event[id].authorLastName}` }</p>
                                 <Tabs data={event[id]} eventID={id} isAttending={event[id].participants.filter(e => e.userId === auth.uid).length > 0} participant={event[id].participants.filter(e => e.userId === auth.uid)} />
                                 {
                                     event[id].authorId === auth.uid &&
-                                    <Button onClick={() => this.deleteEventHandler(id)} style={{ backgroundColor: 'red', color: 'white', marginTop: '20px' }}>delete event</Button>
+                                    <Button onClick={() => this.deleteEventHandler(id)} className="delete__button">delete event</Button>
                                 }
                             </Container>
                         </React.Fragment>
@@ -110,7 +110,6 @@ class Event extends Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log(state)
     return {
         event: state.firestore.data.events,
         auth: state.firebase.auth

@@ -114,13 +114,13 @@ class CreateEvent extends Component {
                         <Slider {...settings}>
                             <Container>
                                 <div>
-                                    <span style={{ position: 'absolute', zIndex: '999', padding: '4px 10px', margin: '10px', backgroundColor: '#000000c4', fontWeight: '800', borderRadius: '4px', color: 'white', fontSize: '0.8rem' }}>Featured</span>
+                                    <span className="featured__badge">Featured</span>
                                     <Image src="https://images.pexels.com/photos/295047/pexels-photo-295047.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" srcSet="" />
                                 </div>
                             </Container>
                             <Container>
                                 <div>
-                                    <span style={{ position: 'absolute', zIndex: '999', padding: '4px 10px', margin: '10px', backgroundColor: '#000000c4', fontWeight: '800', borderRadius: '4px', color: 'white', fontSize: '0.8rem' }}>Featured</span>
+                                    <span className="featured__badge">Featured</span>
                                     <Image src="https://images.pexels.com/photos/1443657/pexels-photo-1443657.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="" srcSet="" />
                                 </div>
                             </Container>
@@ -148,11 +148,6 @@ class CreateEvent extends Component {
                             <Form.Field>
                                 <Form.Select id="category" placeholder="Category" options={categoryOptions} onChange={this.handleSelectCategory} />
                             </Form.Field>
-                            <Form.Group>
-                                {/* <Form.Select />
-                                <Form.Select />
-                                <Form.Select /> */}
-                            </Form.Group>
                         </Form>
                     </Container>
                 </div>

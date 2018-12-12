@@ -46,3 +46,13 @@ export const signUp = (newUser) => {
         })
     }
 }
+
+export const deleteUser = () => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+
+        firebase.auth().currentUser.delete().then(() => {
+            dispatch({ type: 'DELETED_USER_SUCCESS' })
+        })
+    }
+}

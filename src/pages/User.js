@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { signOut } from '../store/actions/authActions';
+import { signOut, deleteUser } from '../store/actions/authActions';
 
 import { Container, Button, List } from 'semantic-ui-react';
 import Navbar from '../components/Navbar';
@@ -25,32 +25,36 @@ class User extends Component {
                         <h2 style={{ marginTop: '0', fontSize: '1.7rem', fontWeight: '800' }}>Connect</h2>
                     </div>
                 </Container>
-                <Container style={{ position: 'absolute', bottom: '120px' }}>
-                    <h3>Profile</h3>
-                    <List>
-                        <List.Item>
-                            <List.Content>
-                                <List.Header as='a'>{`${profile.firstName} ${profile.lastName}`}</List.Header>
-                                <List.Description>
-                                    You have {' '}
-                                    <a href="/points">
-                                        <b>{profile.points} points</b>
-                                    </a>{' '}
-                                    to spare, visit the points store to gain discounts.
-                                </List.Description>
-                            </List.Content>
-                        </List.Item>
-                    </List>
-                    <p onClick={this.revealDelete}>Press here to delete your account.</p>
-                    {
-                        this.state.open && 
-                        <Button negative fluid style={{ marginBottom: '20px' }}>Delete Account</Button>
-                    }
-                    <Button disabled fluid style={{ marginBottom: '20px', backgroundColor: '#3b5998', color: 'white' }}>Connect with Facebook</Button>
+                <Container className="user__container">
                     <div>
-                        <Link to="/login">
-                            <Button onClick={this.props.signOut} fluid>Sign Out</Button>
-                        </Link>
+                        <h3>Profile</h3>
+                        <List>
+                            <List.Item>
+                                <List.Content>
+                                    <List.Header as='a'>{`${profile.firstName} ${profile.lastName}`}</List.Header>
+                                    <List.Description>
+                                        You have {' '}
+                                        <a href="/points">
+                                            <b>{profile.points} points</b>
+                                        </a>{' '}
+                                        to spare, visit the points store to gain discounts.
+                                    </List.Description>
+                                </List.Content>
+                            </List.Item>
+                        </List>
+                    </div>
+                    <div>
+                        <p onClick={this.revealDelete}>Press here to delete your account.</p>
+                        {
+                            this.state.open && 
+                            <Button negative fluid style={{ marginBottom: '20px' }} onClick={this.props.deleteUser}>Delete Account</Button>
+                        }
+                        <Button disabled fluid style={{ marginBottom: '20px', backgroundColor: '#3b5998', color: 'white' }}>Connect with Facebook</Button>
+                        <div>
+                            <Link to="/login">
+                                <Button onClick={this.props.signOut} fluid>Sign Out</Button>
+                            </Link>
+                        </div>
                     </div>
                 </Container>
                 <Navbar pathObject={this.props.history} />
@@ -67,7 +71,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signOut: () => dispatch(signOut())
+        signOut: () => dispatch(signOut()),
+        deleteUser: () => dispatch(deleteUser())
     }
 }
 

@@ -6,9 +6,7 @@ export default class EventCard extends Component {
 
     return (
       <div className="event__card__container" onClick={this.props.goTo}>
-        {/* <Lazyload throttle={150} height={'100%'}> */}
-          <img className="event__card__image" src={event.image} alt="" />
-        {/* </Lazyload> */}
+        <img className="event__card__image" src={event.image} alt="" />
         <div className="event__card__content__wrapper">
           <div>
             <p style={{ fontWeight: 'bold' }}>{event.title}</p>
@@ -17,7 +15,7 @@ export default class EventCard extends Component {
           <div className="sub__info__wrapper">
             <div>
               <p style={{ fontWeight: 'bold' }}>Date</p>
-              <p>fill</p>
+              <p>...</p>
             </div>
             <div>
               <p style={{ fontWeight: 'bold' }}>Category</p>

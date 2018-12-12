@@ -74,7 +74,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* padding: 20px 40px 20px 20px; */
     padding: 20px;
     width: 100%;
 }
@@ -82,6 +81,20 @@
 .event__card__content__wrapper .sub__info__wrapper {
     display: flex;
     justify-content: space-between;
+}
+
+.event__image {
+    margin-bottom: 20px;
+    object-fit: cover;
+    width: 100vw;
+    height: 200px;
+    border-radius: 4px 4px 0 0;
+}
+
+.delete__button {
+    background: red !important;
+    color: white !important;
+    margin-top: 20px !important;
 }
 
 .fake__background {
@@ -144,14 +157,6 @@ i.icon {
     justify-content: space-between;
 }
 
-@media screen and (min-width: 500px) {
-    .slider__image {
-        height: 100% !important;
-        width: auto !important;
-        padding-right: 2rem;
-    }
-}
-
 .back__button {
     background-color: #FCFCFC;
     border-radius: 100px;
@@ -170,6 +175,13 @@ i.icon {
     height: 65vh;
 }
 
+.user__container {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70vh;
+}
+
 .points__container .points {
     margin-top: 45%;
     color: #FF4789;
@@ -184,8 +196,51 @@ i.icon {
     font-size: 1rem;
 }
 
+.points__container .points p {
+    text-align: center;
+    color: #333;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.ui.form .field>.selection.dropdown>.dropdown.icon {
+    top: 0;
+}
+
+.featured__badge {
+    position: absolute;
+    z-index: 999;
+    padding: 4px 10px;
+    margin: 10px;
+    background-color: #000000c4;
+    font-weight: 800;
+    border-radius: 4px;
+    color: white;
+    font-size: .8rem;
+}
+
+.content__tab__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content__tab__container .details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
 .App {
     overflow: hidden;
     background-color: #fcfcfc;
     min-height: 100vh;
+}
+
+@media screen and (min-width: 500px) {
+    .slider__image {
+        height: 100% !important;
+        width: auto !important;
+        padding-right: 2rem;
+    }
 }
